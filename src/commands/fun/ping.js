@@ -8,4 +8,4 @@ module.exports =
             const latency = interaction.client.ws.ping;
             await interaction.reply(`Pong! A latência está em ${latency}ms`);
         },
-    };
+    }
