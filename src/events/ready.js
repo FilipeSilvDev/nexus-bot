@@ -1,4 +1,4 @@
-const { Events } = require('discord.js');
+const { Events, Activity } = require('discord.js');
 
 module.exports =
 {
@@ -6,6 +6,16 @@ module.exports =
     once: true,
     execute(client)
     {
-        console.log(`[🟢 ONLINE!] Logado como ${client.user.tag}`);
+        client.user.setPresence({
+            activities: [{
+                name: 'Criando features',
+                type: 'PLAYING',
+            }]
+        });
+
+        console.log(`[🟢 ONLINE]`);
+        console.log(`Logado como: ${client.user.username}`);
+        console.log(`Tag: ${client.user.tag}`);
+        console.log(`Client ID: ${client.user.id}`);
     }
 }
