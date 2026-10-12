@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { GetLayerSummarieApi } = require('../../services/ISteamUser/GetPlayerSummaries');
+const { GetLayerSummarieApi } = require('../../services/Steam/GetPlayerSummaries');
 const { convertUnixToDate } = require('../../utils/ConvertUnixToDate');
-const { SeachGameInStore } = require('../../services/StorageSearch/SteamStorage');
+const { SeachGameInStore } = require('../../services/Steam/SteamStorage');
 const { RemoveHtml } = require('../../utils/RemoveHtml')
 
 async function SteamProfileCommand(interaction) {
