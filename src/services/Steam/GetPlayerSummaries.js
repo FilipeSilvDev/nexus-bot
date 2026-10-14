@@ -13,4 +13,4 @@ async function GetLayerSummarieApi(SteamKey, SteamId) {
     return data.response.players[0];
 }
 
-module.exports = { GetLayerSummarieApi };
+module.exports = GetLayerSummarieApi;

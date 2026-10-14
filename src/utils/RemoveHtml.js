@@ -5,4 +5,4 @@ async function RemoveHtml(text) {
     return $.text().trim();
 }
 
-module.exports = { RemoveHtml };
+module.exports = RemoveHtml;

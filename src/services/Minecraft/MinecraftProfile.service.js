@@ -62,6 +62,5 @@ async function getProfile(username) {
     };
 }
 
-module.exports = {
-    getProfile
-};
+module.exports = getProfile;
+

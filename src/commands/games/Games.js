@@ -1,7 +1,18 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 
-const { getProfile } = require('../../services/Minecraft/MinecraftProfile.service');
-const { MinecraftProfile } = require('./Minecraft/MinecraftProfile');
+const MinecraftProfile = require('./Minecraft/MinecraftProfile');
+const SteamProfile = require('./Steam/SteamProfile');
+const SteamSearchGame = require('./Steam/SteamSearchGame');
+
+const commandsGroup = {
+    minecraft: {
+        profile: MinecraftProfile,
+    },
+    steam: {
+        profile: SteamProfile,
+        game: SteamSearchGame,
+    }
+}
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -22,25 +33,47 @@ module.exports = {
                     .setRequired(true)
                 )
             )
+        )
+        .addSubcommandGroup(group =>
+        group
+            .setName('steam')
+            .setDescription('Comando da Steam')
+            .addSubcommand(subcommand =>
+            subcommand
+                .setName('profile')
+                .setDescription('Realiza a busca de um perfil público da steam')
+                .addStringOption(option =>
+                option
+                    .setName('perfil')
+                    .setDescription('SteamID64, Vanity URL ou link do perfil')
+                    .setRequired(true)
+                )
+            )
+            .addSubcommand((subcommand) =>
+                subcommand
+                    .setName('game')
+                    .setDescription('Procura um jogo na steam baseado no termo inserido')
+                    .addStringOption((option) =>
+                        option
+                            .setName('game_name')
+                            .setDescription("Nome do jogo que deseja pesquisar")
+                            .setRequired(true)
+                    )
+            )
         ),
 
     async execute(interaction) {
         const group = interaction.options.getSubcommandGroup();
         const subcommand = interaction.options.getSubcommand();
+        const handler = commandsGroup[group]?.[subcommand];
 
-        if (group === "minecraft") {
-            switch (subcommand) {
-                case "profile":
-                    return MinecraftProfile(interaction);
-
-                default:
-                    throw new Error(`Subcomando Minecraft não implementado: ${subcommand}`);
-            }
+        if (!handler) {
+            await interaction.reply({
+                content: `O comando **${subcommand}** não existe!.`,
+                ephemeral: true,
+            })
         }
 
-        await interaction.reply({
-            content: `O comando **${subcommand}** do grupo **${group}** não existe.`,
-            ephemeral: true,
-        })
+        handler(interaction);
     }
 }

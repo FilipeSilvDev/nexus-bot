@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { getProfile } = require("../../../services/Minecraft/MinecraftProfile.service");
+const getProfile = require("../../../services/Minecraft/MinecraftProfile.service");
 
 async function MinecraftProfile(interaction) {
     const username = interaction.options.getString("username");
@@ -84,4 +84,4 @@ https://namemc.com/profile/${profile.uuid})`
     }
 }
 
-module.exports = { MinecraftProfile}
+module.exports = MinecraftProfile;
