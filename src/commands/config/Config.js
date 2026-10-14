@@ -4,7 +4,7 @@ const { styleText } = require('node:util');
 const {
     setNewsChannel,
     setLogsChannel
-} = require('../../database/repositories/GuildSettingsRepository');
+} = require('../../database/repositories/GuildSettings.repository');
 
 module.exports = {
     data: new SlashCommandBuilder()

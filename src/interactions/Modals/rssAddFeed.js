@@ -1,4 +1,4 @@
-const { addFeed } = require('../../database/repositories/RssRepository');
+const { addFeed } = require('../../database/repositories/Rss.repository');
 
 module.exports = {
     customId: 'rss:add-feed',
