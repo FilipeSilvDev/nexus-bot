@@ -1,6 +1,6 @@
 const { request } = require('undici');
 
-async function SeachGameInStore(term) {
+async function SearchGameInStore(term) {
     const { body } = await request(`https://store.steampowered.com/api/storesearch/?term=${term}&l=brazilian&cc=br`);
     const resultSearch = await body.json();
     const firstGameList = resultSearch.items[0].id;
@@ -23,4 +23,4 @@ async function SearchGameDetails(gameId) {
     }
 }
 
-module.exports = { SeachGameInStore, SearchGameDetails }
+module.exports = SearchGameInStore;
